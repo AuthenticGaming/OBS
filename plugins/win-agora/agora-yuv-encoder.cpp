@@ -14,21 +14,14 @@ static void* AgoroYUV_Create(obs_data_t* settings, obs_encoder_t* encoder)
 
 static void AgoraYUV_Destroy(void* data)
 {
-	AgoraRtcEngine::GetInstance()->AgoraVideoObserver_Destroy(data);
+	AgoraRtcEngine::GetInstance()->AgoraVideoObserver_Destroy();
 }
 
 static bool AgoraYUV_Encode(void* data, struct encoder_frame* frame,
 struct encoder_packet* packet, bool *receive_packet)
 {
-//	CExtendVideoFrameObserver* videoObserver = static_cast<CExtendVideoFrameObserver*>(data);
-//	AgoraRtcEngine* agora = AgoraRtcEngine::GetInstance();
-
-	AgoraRtcEngine::GetInstance()->pushVideoFrame(frame);
-//	if (agora->agora_out_cx && agora->agora_out_cy && agora->agora_out_cx == frame->linesize[0])
-//	{
-
-//		//memcpy(videoObserver->m_lpImageBuffer, frame->data[0], agora->agora_out_cx *agora->agora_out_cy * 3 / 2);
-//	}
+	AgoraRtcEngine::GetInstance()->AgoraVideoObserver_Encode(data, frame, packet, receive_packet);
+	//AgoraRtcEngine::GetInstance()->pushVideoFrame(frame);//video frame observer
 	return true;
 }
 

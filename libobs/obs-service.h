@@ -52,7 +52,7 @@ struct obs_service_info {
 	 *
 	 * @param  data    Internal service data
 	 * @param  output  Output context
-	 * @eturn          true to allow the output to start up,
+	 * @return         true to allow the output to start up,
 	 *                 false to prevent output from starting up
 	 */
 	bool (*initialize)(void *data, obs_output_t *output);
@@ -63,11 +63,11 @@ struct obs_service_info {
 	const char *(*get_username)(void *data);
 	const char *(*get_password)(void *data);
 
-	bool (*supports_multitrack)(void *data);
+	bool (*deprecated_1)();
 
 	void (*apply_encoder_settings)(void *data,
-			obs_data_t *video_encoder_settings,
-			obs_data_t *audio_encoder_settings);
+				       obs_data_t *video_encoder_settings,
+				       obs_data_t *audio_encoder_settings);
 
 	void *type_data;
 	void (*free_type_data)(void *type_data);
@@ -75,14 +75,15 @@ struct obs_service_info {
 	const char *(*get_output_type)(void *data);
 
 	/* TODO: more stuff later */
-	//agora
-	bool (*setup_agora_remote_video)(uint32_t uid, void* view);
-	bool (*add_agora_publish_stream_url)(const char* url, bool transcoding);
-	bool (*remove_agora_publish_stream_url)(const char* url);
+	//add by agora
+	bool (*setup_agora_remote_video)(uint32_t uid, void *view);
+	bool (*add_agora_publish_stream_url)(const char *url, bool transcoding);
+	bool (*remove_agora_publish_stream_url)(const char *url);
+	//end
 };
 
 EXPORT void obs_register_service_s(const struct obs_service_info *info,
-		size_t size);
+				   size_t size);
 
 #define obs_register_service(info) \
 	obs_register_service_s(info, sizeof(struct obs_service_info))

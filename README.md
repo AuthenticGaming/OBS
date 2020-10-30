@@ -6,16 +6,17 @@
 
 * Requirements for using obs-studio for building HQ on windows
    
-    * Cmake of Windows version
+    * Cmake of Windows version(3.16 and above)
    
-    * visual studio 2015(also support vs2013 and vs2017)
+    * visual studio 2017/2019
     
-    * QT 5.9.2(msvc2015, any version QT adjust to visual studio version) if you need UI
+    * QT 5.14.2(msvc2017/2019, any version QT adjust to visual studio version) if you need UI
 
+    * windows sdk version 10.0.19041.0
 * Version
 
-    * agora sdk windows version 2.9.0 and above(x86), also support x64.
-    * obs studio 21.1b and above(x86), also support x64.
+    * agora sdk windows version 2.7.1 and above(x86), also support x64.
+    * obs studio 25.0 and above(x86), also support x64.
     
 * Build project with CMake-gui：
 
@@ -24,10 +25,10 @@
     * Set variables in windows environment:
         * DepsPath 
 
-               The path where win32 or win64 is located after decompressing dedependencies2015.zip(dedependencies2013.zip or dedependencies2017.zip). dedependencies2013 not support win64. 
+               The path where win32 or win64 is located after decompressing [dedependencies2017_agora.zip](github.com/AgoraIO/OBS/releases/download/2.7.1/dependencies2017_agora.zip)
         * QTDir
 
-               The path where win32 is loacted after installed QT 5.9.2
+               The path where win32 is loacted after installed QT 5.14.2
         * Uncheck ENABLE\_SCRIPTING
 
         * After configure is ok,then click generate, vs project can be generated.
@@ -36,7 +37,7 @@
 
 In order to use agora sdk in your own obs studio, there's statement about compile and source code.
 
-### Initialize Agora Service Settings In Application
+###Initialize Agora Service Settings In Application
 
 You can reference source code in window-basic-main.cpp file(OBSBasic::InitAgoraServiceSettings).
 
@@ -132,7 +133,7 @@ Currently encapsulated apis and callbacks:
 * onUserJoined
 * onFirstRemoteVideoDecoded
 
-#### how to add agora sdk apis
+####how to add agora sdk apis
 
 * In the file obs-service.h，add new member function declaration to obs\_service\_info
 * In the file agora-service.cpp，Add member function implement for agora\_service, the member fucntion will call agora sdk api.
@@ -143,7 +144,7 @@ Currently encapsulated apis and callbacks:
 You can reference setupRemoteVideo, it's implemented in obs\_service\_agora\_setup\_remote\_video
  and obs\_service\_info.setup\_agora\_remote\_video.
 
-#### how to add agora callbacks
+####how to add agora callbacks
 
 After calling some apis, you'll receive agora callbacks. Sometimes you must first  receive callbacks, then you can call other agora apis. For example, after receiving onUserJoined callback, you can call setupRemoteVideo to show remote video.
 
@@ -172,3 +173,13 @@ after receive userJoined signal, it'll call AgoraUserJoined static member functi
         QMetaObject::invokeMethod(App()->GetMainWindow(), "OnUserJoined", Q_ARG(long long, uid));
 Now you can do something in OBSBasic::OnUserJoined* 
             
+## Contact us
+- The full API documentation can be found in the Documentation Center (https://docs.agora.io/cn/)
+- If you have problems with the integration, you can go to [Developer Community] (https://dev.agora.io/cn/)
+- If there is a pre-sale consultation question, you can call 400 632 6626, or join the official Q group 12742516
+- If you need after-sale technical support, you can submit a ticket at [Agora Dashboard] (https://dashboard.agora.io)
+- If you find bugs in the sample code, please submit [issue](https://github.com/AgoraIO/obs/issues)
+
+## Code license
+The MIT License (MIT).
+

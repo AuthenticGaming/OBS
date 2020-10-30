@@ -16,13 +16,7 @@
 /debug32/
 /debug64/
 /builds/
-/vs2013/
-/vs2013_NOUI/
-/vs2015/
-/vs2017/
-/dependencies2013/
-/dependencies2015/
-/dependencies2017/
+.vs/
 *.o.d
 *.ninja
 .ninja*
@@ -33,6 +27,7 @@
 
 #clion
 .idea/
+cmake-build-debug/
 
 #other stuff (windows stuff, qt moc stuff, etc)
 Release_MD/
@@ -42,6 +37,10 @@ x64/
 ipch/
 GeneratedFiles/
 .moc/
+/UI/obs.rc
+.vscode/
+
+
 
 /other/
 
@@ -93,9 +92,8 @@ tags
 *.obj
 *.pdb
 *.res
-*.manifest
 *.dep
-
+*.zip
 *.lnk
 *.chm
 *~
